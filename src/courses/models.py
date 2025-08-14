@@ -1,16 +1,16 @@
 from django.db import models
-
+from django.utils.translation import gettext_lazy as _
 class AccessRequirement(models.TextChoices):
-    ANYONE="any","Anyone"
-    EMAIL_REQUIRED="email_required","Email required"
+    ANYONE="any",_("Anyone")
+    EMAIL_REQUIRED="email_required",_("Email required")
 
 
 class PublishStatus(models.TextChoices):
-    # "pub" this is what i will see in database
+    # "publish" this is what i will see in database
     # "Published" this is what i will see in choices
-    PUBLISHED="publish","Published"
-    COMING_SOON="soon","Coming Soon"
-    DRAFT="draft","Draft"
+    PUBLISHED="publish",_("Published")
+    COMING_SOON="soon",_("Coming Soon")
+    DRAFT="draft",_("Draft")
 
 # Create your models here.
 class Course(models.Model):
