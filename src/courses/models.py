@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from cloudinary.models import CloudinaryField
+
+
 class AccessRequirement(models.TextChoices):
     ANYONE="any",_("Anyone")
     EMAIL_REQUIRED="email_required",_("Email required")
@@ -21,7 +24,8 @@ class Course(models.Model):
     title=models.CharField(max_length=120)
     description=models.TextField(blank=True,null=True)
     publish_date=models.DateField()
-    image=models.ImageField(upload_to=handle_upload,blank=True,null=True)
+    # image=models.ImageField(upload_to=handle_upload,blank=True,null=True)
+    image=CloudinaryField("image",null=True)
     access=models.CharField(
         max_length=20,
         choices=AccessRequirement.choices,
