@@ -13,10 +13,11 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields=['title','description']
 
     def display_image(self,obj):
-        url=obj.image.url
-        cloudinary_id=str(obj.image)
-        cloudinary_html=CloudinaryImage(cloudinary_id).image(width=100)
-        return format_html(cloudinary_html)
+        # url=obj.image.url
+        url=obj.image_admin
+        # cloudinary_id=str(obj.image)
+        # cloudinary_html=CloudinaryImage(cloudinary_id).image(width=100)
+        return format_html(f"<img src={url}/img>")
     display_image.short_description="Current Image"
 
 
