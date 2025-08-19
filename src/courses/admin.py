@@ -15,3 +15,6 @@ class CourseAdmin(admin.ModelAdmin):
         print(obj.image.url)
         url=obj.image.url
         return format_html(f"<img src='{url}' width=100/>")
+    display_image.short_description="Current Image"
+
+
