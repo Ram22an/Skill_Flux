@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from cloudinary.models import CloudinaryField
-
+import helpers
+helpers.cloudinary_init()
 
 class AccessRequirement(models.TextChoices):
     ANYONE="any",_("Anyone")
