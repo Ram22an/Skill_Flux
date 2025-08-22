@@ -1,14 +1,23 @@
 from cloudinary import CloudinaryImage
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Course
+from .models import Course,Lesson
+
+class LessonInLine(admin.StackedInline):
+    model=Lesson
+    readonly_fields=['update']
+    extra=0
+
+
+
 # Register your models here.
 # admin.site.register(Course) or use decorator
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    fields=['title','description','publish_date','access','status','image','display_image']
+    inlines=[LessonInLine]
+    fields=['title','description','timestamp','access','status','image','display_image','update']
     readonly_fields=['display_image']
-    list_display=['title','publish_date','display_image']
+    list_display=['title','timestamp','display_image']
     list_filter=['status','access']
     search_fields=['title','description']
 
