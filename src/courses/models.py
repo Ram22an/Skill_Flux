@@ -67,5 +67,22 @@ class Course(models.Model):
         url=self.image.build_url(**image_options)
         return url
 
+# Lesson.objects.all() # lesson queryset -> all rows
+# Lesson.objects.first() # lesson queryset -> first rows
+# course_obj=Course.objects.first()
+# Lesson.objects.filter(course__id=course_obj.id)
+
+# course_obj.Lesson__set.all()
+
+# lessonObj=lesson.objects.all()
+# courseobj=lessonObj.course
+# ne_course_lesson=courseobj.lesson__set.all()
+
+class Lesson(models.Model):
+    course=models.ForeignKey(Course,on_delete=models.CASCADE)
+    title=models.CharField(max_length=120)
+    description=models.TextField(blank=True,null=True)
+
+
 
 
