@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from cloudinary.models import CloudinaryField
+from django.utils.text import slugify
 import helpers
 helpers.cloudinary_init()
 
@@ -20,6 +21,23 @@ def handle_upload(instance,filename):
     return f"{filename}"
 
 
+def get_public_id_prefix(instance,*args,**kwargs):
+    title=instance.title
+    if title:
+        slug= slugify(title)
+        return f"courses/{slug}"
+    if instance.id:
+        return f'courses/{instance.id}'
+    return "courses"
+
+def get_display_name(instance,*args,**kwargs):
+    title=instance.title
+    if title:
+        return title
+    return "Courses Upload"
+
+
+
 # Create your models here.
 class Course(models.Model):
     title=models.CharField(max_length=120)
@@ -27,7 +45,10 @@ class Course(models.Model):
     timestamp=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
     # image=models.ImageField(upload_to=handle_upload,blank=True,null=True)
-    image=CloudinaryField("image",null=True)
+    image=CloudinaryField("image",
+                          null=True,
+                          public_id_prefix=get_public_id_prefix,
+                          display_name=get_display_name)
     access=models.CharField(
         max_length=20,
         choices=AccessRequirement.choices,

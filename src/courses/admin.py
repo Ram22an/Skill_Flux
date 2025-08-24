@@ -15,8 +15,8 @@ class LessonInLine(admin.StackedInline):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     inlines=[LessonInLine]
-    fields=['title','description','timestamp','access','status','image','display_image','update']
-    readonly_fields=['display_image']
+    fields=['title','description','timestamp','access','status','image','display_image','updated']
+    readonly_fields=['display_image','timestamp','updated']
     list_display=['title','timestamp','display_image']
     list_filter=['status','access']
     search_fields=['title','description']
