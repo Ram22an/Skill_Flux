@@ -26,7 +26,7 @@ class CourseAdmin(admin.ModelAdmin):
         url=obj.image_admin
         # cloudinary_id=str(obj.image)
         # cloudinary_html=CloudinaryImage(cloudinary_id).image(width=100)
-        return format_html(f"<img src={url}/img>")
+        return format_html(f"<img src='{url}' />")
     display_image.short_description="Current Image"
 
 
